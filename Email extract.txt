@@ -1,0 +1,47 @@
+import re
+
+
+def extract_emails():
+    try:
+        # Open and read input file
+        with open("input.txt", "r") as file:
+            text = file.read()
+
+        # Find all email addresses
+        emails = re.findall(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", text)
+
+        if emails:
+            # Save emails to output file
+            with open("emails.txt", "w") as file:
+                for email in emails:
+                    file.write(email + "\n")
+
+            print("\nEmail addresses found:")
+            for email in emails:
+                print(email)
+
+            print("\nEmails saved to emails.txt")
+
+        else:
+            print("\nNo email addresses found.")
+
+    except FileNotFoundError:
+        print("\ninput.txt not found.")
+
+
+while True:
+    print("\n===== EMAIL EXTRACTOR =====")
+    print("1. Extract Emails")
+    print("2. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        extract_emails()
+
+    elif choice == "2":
+        print("Program Closed.")
+        break
+
+    else:
+        print("Invalid choice. Try again.")

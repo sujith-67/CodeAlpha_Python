@@ -1,0 +1,126 @@
+# Stock Portfolio Tracker
+
+stock_prices = {
+    "AAPL": 180,
+    "TSLA": 250,
+    "GOOGL": 140,
+    "MSFT": 420,
+    "AMZN": 190
+}
+
+portfolio = {}
+
+
+def add_stock():
+    print("\nAvailable Stocks:")
+    for stock, price in stock_prices.items():
+        print(f"{stock}: ${price}")
+
+    stock_name = input("\nEnter stock name: ").upper()
+
+    if stock_name not in stock_prices:
+        print("Stock not found!")
+        return
+
+    try:
+        quantity = int(input("Enter quantity: "))
+
+        if quantity <= 0:
+            print("Quantity must be greater than 0.")
+            return
+
+        if stock_name in portfolio:
+            portfolio[stock_name] += quantity
+        else:
+            portfolio[stock_name] = quantity
+
+        print(f"{quantity} shares of {stock_name} added successfully!")
+
+    except ValueError:
+        print("Please enter a valid number.")
+
+
+def view_portfolio():
+    if not portfolio:
+        print("\nPortfolio is empty.")
+        return
+
+    print("\n----- YOUR PORTFOLIO -----")
+    total = 0
+
+    for stock, quantity in portfolio.items():
+        price = stock_prices[stock]
+        value = price * quantity
+        total += value
+
+        print(
+            f"{stock} | Quantity: {quantity} | Price: ${price} | Value: ${value}"
+        )
+
+    print(f"\nTotal Investment Value: ${total}")
+
+
+def save_to_file():
+    if not portfolio:
+        print("\nNothing to save.")
+        return
+
+    total = 0
+
+    with open("portfolio.txt", "w") as file:
+        file.write("STOCK PORTFOLIO REPORT\n")
+        file.write("=" * 40 + "\n")
+
+        for stock, quantity in portfolio.items():
+            price = stock_prices[stock]
+            value = price * quantity
+            total += value
+
+            file.write(
+                f"{stock} | Quantity: {quantity} | Price: ${price} | Value: ${value}\n"
+            )
+
+        file.write("\n")
+        file.write(f"Total Investment Value: ${total}")
+
+    print("Portfolio saved to portfolio.txt")
+
+
+def start_over():
+    portfolio.clear()
+    print("Portfolio cleared successfully!")
+
+
+while True:
+    print("\n===== STOCK PORTFOLIO TRACKER =====")
+    print("1. Add Stock")
+    print("2. View Portfolio")
+    print("3. Save Portfolio")
+    print("4. Start Over")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_stock()
+
+    elif choice == "2":
+        view_portfolio()
+
+    elif choice == "3":
+        save_to_file()
+
+    elif choice == "4":
+        confirm = input(
+            "Are you sure you want to clear the portfolio? (yes/no): "
+        ).lower()
+
+        if confirm == "yes":
+            start_over()
+
+    elif choice == "5":
+        print("Thank you for using Stock Portfolio Tracker!")
+        break
+
+    else:
+        print("Invalid choice. Please try again.")
