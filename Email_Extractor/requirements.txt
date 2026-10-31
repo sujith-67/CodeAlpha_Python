@@ -1,0 +1,12 @@
+# Smart Email Extraction Desktop Utility - Dependencies
+# Modern themed GUI framework
+ttkbootstrap>=2.2.0
+
+# Image and icon processing for GUI assets
+Pillow>=10.0.0
+
+# Note: Python standard library modules used (no separate install required):
+# - tkinter (built-in GUI toolkit)
+# - re (Regular Expressions engine)
+# - csv (CSV file export and handling)
+# - os / pathlib (File system navigation)

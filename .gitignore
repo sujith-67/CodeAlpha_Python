@@ -1,0 +1,58 @@
+# ==============================================================================
+# Universal .gitignore - CodeAlpha Python Programming Repository
+# ==============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Runtime Databases & Local Persistent State
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/stats.json
+
+# Local Runtime Exports & Logs
+*.csv
+*.log
+extracted_emails.csv
+portfolio_export_*.csv
+transactions_audit_*.csv
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# IDE / Editor Configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Environment Secrets
+.env
+.env.*
+*.local
+
+# Preserve directory structures
+!.gitkeep

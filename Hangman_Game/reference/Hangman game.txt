@@ -1,0 +1,94 @@
+import random
+
+# Word list
+words = [
+    "python",
+    "coding",
+    "laptop",
+    "gaming",
+    "rocket"
+]
+
+# Shuffle words initially
+random.shuffle(words)
+word_index = 0
+
+
+def display_word(secret_word, guessed_letters):
+    return " ".join(
+        letter if letter in guessed_letters else "_"
+        for letter in secret_word
+    )
+
+
+def get_next_word():
+    global word_index, words
+
+    # If all words have been used, reshuffle and start again
+    if word_index >= len(words):
+        random.shuffle(words)
+        word_index = 0
+
+    word = words[word_index]
+    word_index += 1
+    return word
+
+
+def play_hangman():
+    secret_word = get_next_word()
+
+    guessed_letters = []
+    attempts_left = 6
+
+    while attempts_left > 0:
+
+        print("\nWord:", display_word(secret_word, guessed_letters))
+        print("Attempts Left:", attempts_left)
+
+        if guessed_letters:
+            print("Guessed Letters:", ", ".join(sorted(guessed_letters)))
+
+        guess = input("Enter a letter: ").lower().strip()
+
+        if len(guess) != 1 or not guess.isalpha():
+            print("❌ Please enter a single alphabet letter.")
+            continue
+
+        if guess in guessed_letters:
+            print("⚠️ You already guessed that letter.")
+            continue
+
+        guessed_letters.append(guess)
+
+        if guess in secret_word:
+            print("✅ Correct!")
+        else:
+            attempts_left -= 1
+            print("❌ Incorrect!")
+
+        if all(letter in guessed_letters for letter in secret_word):
+            print(f"\n🎉 Congratulations! You guessed '{secret_word}'")
+            return
+
+    print(f"\n💀 Game Over! The word was '{secret_word}'")
+
+
+def main():
+    print("=" * 40)
+    print("🎯 WELCOME TO HANGMAN")
+    print("=" * 40)
+    print("Guess the hidden word one letter at a time.")
+    print("You have 6 incorrect attempts.")
+
+    while True:
+        play_hangman()
+
+        choice = input("\nDo you want to play again? (Y/N): ").strip().lower()
+
+        if choice != "y":
+            print("\n👋 Thank you for playing Hangman!")
+            break
+
+
+if __name__ == "__main__":
+    main()
