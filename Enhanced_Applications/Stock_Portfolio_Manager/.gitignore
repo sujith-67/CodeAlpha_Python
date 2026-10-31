@@ -1,0 +1,22 @@
+# Python virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite database & data artifacts
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/*.csv
+
+# Temporary files, caches & logs
+*.log
+*.tmp
+.pytest_cache/
+.coverage
